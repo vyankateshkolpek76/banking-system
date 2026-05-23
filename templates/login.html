@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Banking System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    *{font-family:'Plus Jakarta Sans',sans-serif;}
+    body{min-height:100vh;margin:0;background:linear-gradient(135deg,#0f2044 0%,#1a3a7c 50%,#1a56db 100%);display:flex;align-items:center;justify-content:center;}
+    .login-wrap{display:flex;width:880px;max-width:96vw;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35);}
+    .login-left{flex:1;background:linear-gradient(160deg,#0f2044,#1a56db);padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;}
+    .bank-logo{display:flex;align-items:center;gap:14px;margin-bottom:40px;}
+    .bank-logo .icon{width:52px;height:52px;background:rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;}
+    .bank-logo h2{font-size:20px;font-weight:700;margin:0;}
+    .hero-text h1{font-size:32px;font-weight:700;line-height:1.25;margin-bottom:14px;}
+    .hero-text p{opacity:.65;font-size:14px;line-height:1.7;}
+    .features{display:flex;flex-direction:column;gap:12px;margin-top:32px;}
+    .feat{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;font-size:13px;}
+    .feat i{font-size:18px;opacity:.8;}
+    .login-right{width:380px;padding:48px 40px;display:flex;flex-direction:column;justify-content:center;}
+    .login-right h3{font-size:22px;font-weight:700;color:#0f2044;margin-bottom:6px;}
+    .login-right p{color:#64748b;font-size:13px;margin-bottom:28px;}
+    .form-label{font-size:13px;font-weight:600;color:#1e293b;margin-bottom:6px;}
+    .form-control{border:1.5px solid #e2e8f0;border-radius:10px;padding:11px 14px;font-size:14px;}
+    .form-control:focus{border-color:#1a56db;box-shadow:0 0 0 3px rgba(26,86,219,.1);outline:none;}
+    .input-icon{position:relative;}
+    .input-icon i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:16px;}
+    .input-icon .form-control{padding-left:40px;}
+    .btn-login{width:100%;background:linear-gradient(135deg,#1a56db,#3b82f6);border:none;border-radius:10px;padding:12px;color:#fff;font-size:15px;font-weight:700;margin-top:24px;cursor:pointer;}
+    .btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,86,219,.35);}
+    .alert{border-radius:10px;font-size:13px;margin-top:14px;}
+    @media(max-width:700px){.login-left{display:none;}.login-right{width:100%;padding:36px 24px;}}
+  </style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-left">
+    <div>
+      <div class="bank-logo">
+        <div class="icon">🏦</div>
+        <div><h2>Banking System</h2><small style="opacity:.6;font-size:12px">Management Portal</small></div>
+      </div>
+      <div class="hero-text">
+        <h1>Manage your bank with confidence</h1>
+        <p>A complete banking management solution with accounts, loans, transfers and real-time tracking.</p>
+      </div>
+      <div class="features">
+        <div class="feat"><i class="bi bi-shield-check"></i> Secure login with role-based access</div>
+        <div class="feat"><i class="bi bi-graph-up"></i> Real-time balance and transaction tracking</div>
+        <div class="feat"><i class="bi bi-file-earmark-excel"></i> Excel export and monthly statements</div>
+        <div class="feat"><i class="bi bi-bank"></i> Loan management and EMI tracking</div>
+      </div>
+    </div>
+    <small style="opacity:.35;font-size:11px;">© 2026 Banking System by Vyankatesh Kolpek</small>
+  </div>
+  <div class="login-right">
+    <h3>Welcome back 👋</h3>
+    <p>Sign in to your banking portal</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}{% for msg in messages %}
+        <div class="alert alert-danger">{{ msg }}</div>
+      {% endfor %}{% endif %}
+    {% endwith %}
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <div class="input-icon">
+          <i class="bi bi-person"></i>
+          <input type="text" name="username" class="form-control" placeholder="Enter username" required autofocus/>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-icon">
+          <i class="bi bi-lock"></i>
+          <input type="password" name="password" class="form-control" placeholder="Enter password" required/>
+        </div>
+      </div>
+      <button type="submit" class="btn-login">Sign In →</button>
+    </form>
+    <p style="color:#94a3b8;font-size:11px;margin-top:24px;text-align:center;">Default: admin / admin123</p>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

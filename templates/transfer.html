@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Transfer — Banking System{% endblock %}
+{% block content %}
+
+<div class="topbar">
+  <div>
+    <h1 class="page-title">🔄 Transfer Money</h1>
+    <p class="page-sub">Move funds between two accounts</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4">
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">From Account</label>
+          <input type="text" name="from_account" class="form-control" placeholder="Source account number" required/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">To Account</label>
+          <input type="text" name="to_account" class="form-control" placeholder="Destination account number" required/>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Amount (Rs.)</label>
+          <input type="number" name="amount" class="form-control" placeholder="Enter amount" min="1" step="0.01" required/>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+          <i class="bi bi-arrow-repeat me-1"></i> Confirm Transfer
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}New Account — Banking System{% endblock %}
+{% block content %}
+
+<div class="topbar">
+  <div>
+    <h1 class="page-title">➕ New Account</h1>
+    <p class="page-sub">Create a new customer and bank account</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card p-4">
+      <form method="POST">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Customer full name" required/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input type="text" name="phone" class="form-control" placeholder="10-digit mobile number" required/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="email@example.com" required/>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Address</label>
+            <textarea name="address" class="form-control" rows="2" placeholder="Full address" required></textarea>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Account Type</label>
+            <select name="acc_type" class="form-select" required>
+              <option value="savings">💼 Savings Account</option>
+              <option value="current">🏢 Current Account</option>
+            </select>
+          </div>
+          <div class="col-12 mt-2">
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-person-check me-1"></i> Create Account
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ type|title }} — Banking System{% endblock %}
+{% block content %}
+
+<div class="topbar">
+  <div>
+    {% if type == 'deposit' %}
+      <h1 class="page-title">💰 Deposit Money</h1>
+      <p class="page-sub">Add funds to a customer account</p>
+    {% else %}
+      <h1 class="page-title">💸 Withdraw Money</h1>
+      <p class="page-sub">Take funds from a customer account</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <div class="balance-box mb-3">
+      <div style="font-size:12px;opacity:.6;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Quick Balance Lookup</div>
+      <div style="display:flex;gap:10px">
+        <input id="lookupAcc" class="form-control" placeholder="Enter account number..." style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff;"/>
+        <button onclick="lookupBalance()" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);white-space:nowrap">Check</button>
+      </div>
+      <div id="balanceResult" style="margin-top:12px;font-size:13px;opacity:.8"></div>
+    </div>
+
+    <div class="card p-4">
+      <form method="POST">
+        <div class="mb-4">
+          <label class="form-label">Account Number</label>
+          <input type="text" name="account" class="form-control" placeholder="e.g. ACC123456" required/>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Amount (Rs.)</label>
+          <input type="number" name="amount" class="form-control" placeholder="Enter amount" min="1" step="0.01" required/>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" style="background:{% if type=='deposit' %}linear-gradient(135deg,#059669,#10b981){% else %}linear-gradient(135deg,#dc2626,#ef4444){% endif %}">
+          {% if type == 'deposit' %}
+            <i class="bi bi-plus-circle me-1"></i> Confirm Deposit
+          {% else %}
+            <i class="bi bi-dash-circle me-1"></i> Confirm Withdrawal
+          {% endif %}
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+async function lookupBalance() {
+  const acc = document.getElementById('lookupAcc').value.trim();
+  if (!acc) return;
+  const res = await fetch(`/api/balance/${acc}`);
+  const el = document.getElementById('balanceResult');
+  if (res.ok) {
+    const d = await res.json();
+    el.innerHTML = `<strong>${d.name}</strong> — <span style="color:#6ee7b7">Rs.${d.balance.toLocaleString('en-IN', {minimumFractionDigits:2})} (${d.account_type})</span>`;
+  } else {
+    el.innerHTML = '<span style="color:#fca5a5">Account not found</span>';
+  }
+}
+document.getElementById('lookupAcc').addEventListener('keydown', e => {
+  if(e.key==='Enter'){e.preventDefault();lookupBalance();}
+});
+</script>
+{% endblock %}
