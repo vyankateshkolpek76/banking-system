@@ -2,16 +2,18 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import mysql.connector
 from datetime import date, datetime
 import random
+import os
 
 app = Flask(__name__)
 app.secret_key = "banking_secret_2024"
 
 def get_db():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Pass@123",
-        database="banking_system"
+        host=os.environ.get("MYSQLHOST", "localhost"),
+        user=os.environ.get("MYSQLUSER", "root"),
+        password=os.environ.get("MYSQLPASSWORD", "Pass@123"),
+        database=os.environ.get("MYSQLDATABASE", "banking_system"),
+        port=int(os.environ.get("MYSQLPORT", 3306))
     )
 
 @app.route("/", methods=["GET", "POST"])
